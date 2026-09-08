@@ -1,0 +1,70 @@
+---
+categories:
+  common:
+    - git
+    - curl
+    - wget
+    - fastfetch
+    - btop
+    - flatpak
+    - cmatrix
+    - fzf
+    - jq
+    - zoxide
+    - eza
+    - age
+    - bat
+
+  nvim:
+    - fd
+    - gcc
+    - make
+    - nvim
+    - ripgrep
+    - tree-sitter-cli
+    - unzip
+
+  hyprland:
+    - hyprland
+    - xdg-desktop-portal-hyprland
+    - hyprpolkitagent
+    - uwsm
+    - mako
+    - rofi
+    - hyprpaper
+    - quickshell
+    - sddm
+    - wl-clipboard
+    - hyprlock
+    - hypridle
+
+  fonts:
+    - ttf-firacode-nerd
+
+  audio:
+    - pipewire
+    - pipewire-pulse
+    - wireplumber
+    - easyeffects
+
+  network:
+    - networkmanager
+    - network-manager-applet
+
+  bluetooth:
+    - bluez
+    - bluez-utils
+
+  opt:
+    - alacritty
+    - trash-cli
+    - chafa
+    - cava
+    - llmfit
+    - yazi
+
+  work:
+    - kubectl
+    - helm
+    - k9s
+    - ansible
