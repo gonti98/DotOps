@@ -61,3 +61,10 @@ categories:
     - chafa
     - cava
     - llmfit
+    - yazi
+
+  work:
+    - kubectl
+    - helm
+    - k9s
+    - ansible

@@ -13,22 +13,30 @@ set -euo pipefail
 echo "---Validating packages---"
 for pkg in $systemPackages; do
     if pacman -Si "$pkg" &>/dev/null; then
-        echo "✓ $pkg"
+        echo "$pkg"
         {{- $validPackages = append $validPackages $pkg }}
     else
-        echo "⚠️  $pkg (not in official repos)"
+        echo "$pkg (not in official repos)"
         {{- $invalidPackages = append $invalidPackages $pkg }}
     fi
 done
 
 echo ""
 if [[ ${#invalidPackages[@]} -gt 0 ]]; then
-    echo "⚠️  ${#invalidPackages[@]} package(s) not found in official repos:"
+    echo "${#invalidPackages[@]} package(s) not found in official repos:"
     printf '%s\n' "${invalidPackages[@]}"
     echo "Install them manually (AUR, local) or remove from packages.yaml"
 fi
 
 ID="{{ .chezmoi.osRelease.id }}"
+
+flathub() {
+  echo ""
+  echo "---Installing Flatpaks---"
+  {{- if .flatpak_packages }}
+  flatpak install -y flathub {{ .flatpak_packages | uniq | join " " }}
+  {{- end }}
+}
 
 case "${ID}" in
   arch)
@@ -37,8 +45,9 @@ case "${ID}" in
         echo "Installing ${#validPackages[@]} valid packages..."
         sudo pacman -S --needed --noconfirm {{ $validPackages | join " " }}
     else
-        echo "⚠️  No valid packages to install"
+        echo "No valid packages to install"
     fi
+    flathub
     ;;
 
   *)
