@@ -13,7 +13,6 @@ Prerequisites:
 - `curl`
 
 ```bash
-# 1. Install chezmoi and bootstrap Dotops
 sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b "$HOME/.local/bin" && \
   chezmoi init --apply gonti98
 ```
