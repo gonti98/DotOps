@@ -14,7 +14,7 @@ Prerequisites:
 
 ```bash
 # 1. Install chezmoi and bootstrap Dotops
-sh -c "$(curl -fsSL [https://get.chezmoi.io](https://get.chezmoi.io))" -- -b "$HOME/.local/bin" && \
+sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b "$HOME/.local/bin" && \
   chezmoi init --apply gonti98
 ```
 
@@ -54,28 +54,6 @@ Use [chezmoi] as a dotfile manager to:
 - Run one‑time and on‑change scripts
 - Encrypt sensitive data (passwords, keys, tokens)
 - Keep everything version‑controlled and reproducible
-
-### Architecture
-
-Two sources of truth that don't overlap:
-
-1. **Public repo**
-   - Package lists
-   - Non‑sensitive configs
-   - Startup scripts and helpers
-
-2. **Private repo**
-   - Encrypted passwords, API keys, tokens
-   - SSH/GPG keys
-   - Any other sensitive files
-
-Both repos are managed with chezmoi; the private repo uses encryption (AGE).
-
-### Security model
-
-- Sensitive data lives only in the private, encrypted repo
-- Encryption keys are stored separately
-- The public repo can be safely shared or open‑sourced
 
 ## License
 
