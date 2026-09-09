@@ -14,11 +14,22 @@ Prerequisites:
 
 ```bash
 sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b "$HOME/.local/bin" && \
-  chezmoi init --apply gonti98
+  chezmoi init --apply https://github.com/gonti98/DotOps.git
 ```
 
 > Never run unknown scripts without reading them.
 > If you're not sure how something works, inspect the script or ask an LLM.
+
+## ⚠️ Important warning
+
+**Do not run this on a production or mature system.** This configuration will:
+
+- Install/upgrade packages system‑wide via `sudo`
+- Replace files in `~/.config/` and other locations
+- Execute arbitrary commands from templates
+- Potentially break existing configurations
+
+**Always test on a VM or clean system first.** This tool is designed for reproducible setups, not incremental changes to existing environments.
 
 ## What problem does this solve?
 

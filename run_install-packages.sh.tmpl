@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{- $systemPackages := list }}
+{{- range $category := .categories }}
+{{- $systemPackages = concat $systemPackages $category }}
+{{- end }}
+{{- $systemPackages = $systemPackages | uniq }}
+
+{{- $validPackages := slice }}
+{{- $invalidPackages := slice }}
+
+echo "---Validating packages---"
+for pkg in $systemPackages; do
+    if pacman -Si "$pkg" &>/dev/null; then
+        echo "✓ $pkg"
+        {{- $validPackages = append $validPackages $pkg }}
+    else
+        echo "⚠️  $pkg (not in official repos)"
+        {{- $invalidPackages = append $invalidPackages $pkg }}
+    fi
+done
+
+echo ""
+if [[ ${#invalidPackages[@]} -gt 0 ]]; then
+    echo "⚠️  ${#invalidPackages[@]} package(s) not found in official repos:"
+    printf '%s\n' "${invalidPackages[@]}"
+    echo "Install them manually (AUR, local) or remove from packages.yaml"
+fi
+
+ID="{{ .chezmoi.osRelease.id }}"
+
+case "${ID}" in
+  arch)
+    echo "---Detected Arch---"
+    if [[ ${#validPackages[@]} -gt 0 ]]; then
+        echo "Installing ${#validPackages[@]} valid packages..."
+        sudo pacman -S --needed --noconfirm {{ $validPackages | join " " }}
+    else
+        echo "⚠️  No valid packages to install"
+    fi
+    ;;
+
+  *)
+    echo "Linux distribution: ${ID} not supported"
+    exit 1
+    ;;
+esac
