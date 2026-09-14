@@ -29,7 +29,8 @@ sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b "$HOME/.local/bin" && \
 - Execute arbitrary commands from templates
 - Potentially break existing configurations
 
-**Always test on a VM or clean system first.** This tool is designed for reproducible setups, not incremental changes to existing environments.
+**Always test on a VM or clean system first.** This tool is designed for
+reproducible setups, not incremental changes to existing environments.
 
 ## What problem does this solve?
 
