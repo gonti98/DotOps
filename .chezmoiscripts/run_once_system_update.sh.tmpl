@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+id="{{ .chezmoi.osRelease.id }}"
+
+case "$id" in
+  arch)
+    sudo pacman -Syu
+    ;;
+  *)
+    printf 'Linux distribution %s is not supported\n' "$id" >&2
+    exit 1
+    ;;
+esac

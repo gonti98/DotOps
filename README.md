@@ -20,7 +20,7 @@ sh -c "$(curl -fsSL https://get.chezmoi.io)" -- -b "$HOME/.local/bin" && \
 > Never run unknown scripts without reading them.
 > If you're not sure how something works, inspect the script or ask an LLM.
 
-## ⚠️ Important warning
+## Important warning
 
 **Do not run this on a production or mature system.** This configuration will:
 
